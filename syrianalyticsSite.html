@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Syrianalytics | Syria's #1 Market Mover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf8;
+    --bg2: #f4f3ef;
+    --bg3: #eeece6;
+    --surface: #ffffff;
+    --border: #e4e2db;
+    --accent: #1a5c3a;
+    --accent-light: #e8f2ec;
+    --accent2: #c8973a;
+    --accent2-light: #fdf3e3;
+    --text: #2a2825;
+    --muted: #7a7670;
+    --heading: #1a1815;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 56px; height: 72px;
+    background: rgba(250,250,248,0.94); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-mark { width: 34px; height: 34px; background: var(--accent); display: flex; align-items: center; justify-content: center; }
+  .logo-mark svg { width: 18px; height: 18px; }
+  .logo-text { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.1rem; color: var(--heading); letter-spacing: -0.02em; }
+  .logo-text span { color: var(--accent); }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { font-size: 0.82rem; font-weight: 400; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta { font-size: 0.8rem; font-weight: 500; background: var(--accent); color: #fff; padding: 9px 22px; text-decoration: none; border-radius: 2px; transition: opacity 0.2s; }
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* ── COMMON ── */
+  section { position: relative; }
+  .section-wrap { max-width: 1160px; margin: 0 auto; padding: 100px 56px; }
+  .label { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; display: flex; align-items: center; gap: 8px; }
+  .label::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--accent); }
+  .section-title { font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(2.2rem, 4vw, 3.2rem); letter-spacing: -0.03em; color: var(--heading); line-height: 1.1; margin-bottom: 20px; }
+  .section-sub { font-size: 1rem; color: var(--muted); line-height: 1.75; max-width: 500px; font-weight: 300; }
+
+  /* ── HERO ── */
+  #home { padding-top: 72px; min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
+  .hero-left { padding: 100px 56px 80px; display: flex; flex-direction: column; justify-content: center; background: var(--bg); }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-light); border: 1px solid rgba(26,92,58,0.15); border-radius: 20px; padding: 6px 14px 6px 8px; margin-bottom: 40px; width: fit-content; animation: fadeIn 0.8s ease both; }
+  .badge-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulseDot 2s infinite; }
+  .hero-badge span { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+  .hero-title { font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(2.8rem, 5vw, 4.5rem); line-height: 1.05; letter-spacing: -0.04em; color: var(--heading); margin-bottom: 28px; animation: fadeUp 0.8s 0.1s ease both; }
+  .hero-title em { font-style: italic; color: var(--accent); }
+  .hero-desc { font-size: 1rem; line-height: 1.75; color: var(--muted); max-width: 440px; margin-bottom: 48px; font-weight: 300; animation: fadeUp 0.8s 0.2s ease both; }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 64px; animation: fadeUp 0.8s 0.3s ease both; }
+  .btn-primary { font-size: 0.85rem; font-weight: 500; background: var(--accent); color: #fff; padding: 13px 28px; text-decoration: none; border-radius: 2px; transition: opacity 0.2s, transform 0.2s; }
+  .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+  .btn-outline { font-size: 0.85rem; font-weight: 400; background: transparent; color: var(--text); border: 1px solid var(--border); padding: 13px 28px; text-decoration: none; border-radius: 2px; transition: border-color 0.2s, color 0.2s; }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-stats { display: flex; gap: 36px; padding-top: 36px; border-top: 1px solid var(--border); animation: fadeUp 0.8s 0.4s ease both; }
+  .stat-val { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 600; color: var(--heading); letter-spacing: -0.03em; line-height: 1; }
+  .stat-val span { color: var(--accent); }
+  .stat-lbl { font-size: 0.75rem; color: var(--muted); margin-top: 4px; font-weight: 300; }
+  .hero-right { background: var(--bg2); display: flex; align-items: center; justify-content: center; padding: 40px; position: relative; overflow: hidden; border-left: 1px solid var(--border); }
+  .hero-visual { width: 100%; max-width: 440px; }
+  .chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 28px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+  .chart-title { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; }
+  .chart-live { display: flex; align-items: center; gap: 5px; color: var(--accent); }
+  .chart-live::before { content: ''; width: 5px; height: 5px; background: var(--accent); border-radius: 50%; animation: pulseDot 1.5s infinite; }
+  .bar-chart { display: flex; align-items: flex-end; gap: 10px; height: 120px; margin-bottom: 12px; }
+  .bc { flex: 1; border-radius: 3px 3px 0 0; animation: growUp 1.2s ease both; }
+  .bc.green { background: var(--accent); }
+  .bc.gold { background: var(--accent2); }
+  .bar-labels { display: flex; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--muted); }
+  .bar-labels span { flex: 1; text-align: center; }
+  .metric-row { display: flex; gap: 12px; margin-top: 24px; }
+  .metric-box { flex: 1; background: var(--bg2); border-radius: 6px; padding: 14px; }
+  .metric-box .m-val { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 600; color: var(--heading); letter-spacing: -0.02em; }
+  .metric-box .m-val.up { color: var(--accent); }
+  .metric-box .m-lbl { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
+  .float-tag { position: absolute; bottom: 60px; left: 40px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; box-shadow: 0 4px 20px rgba(0,0,0,0.07); display: flex; align-items: center; gap: 12px; animation: floatAnim 4s ease-in-out infinite; }
+  .float-icon { width: 36px; height: 36px; background: var(--accent-light); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+  .float-text .fv { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 600; color: var(--accent); }
+  .float-text .fl { font-size: 0.7rem; color: var(--muted); }
+
+  /* ── ABOUT ── */
+  #about { background: var(--surface); border-top: 1px solid var(--border); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 60px; align-items: center; }
+  .about-text p { font-size: 0.95rem; color: var(--muted); line-height: 1.8; margin-bottom: 18px; font-weight: 300; }
+  .about-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+  .highlight { padding: 20px; background: var(--bg2); border-radius: 6px; border: 1px solid var(--border); }
+  .highlight-icon { font-size: 1.3rem; margin-bottom: 10px; }
+  .highlight-title { font-size: 0.85rem; font-weight: 600; color: var(--heading); margin-bottom: 4px; }
+  .highlight-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+  .about-img-stack { position: relative; height: 420px; }
+  .about-card-main { position: absolute; inset: 0; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 32px; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; }
+  .mission-quote { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 600; color: var(--heading); line-height: 1.3; letter-spacing: -0.02em; position: relative; z-index: 1; }
+  .mission-quote::before { content: '"'; font-size: 8rem; color: var(--bg3); position: absolute; top: -40px; left: -10px; line-height: 1; z-index: 0; }
+  .mission-credit { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-top: 16px; }
+  .about-badge { position: absolute; top: 20px; right: -16px; background: var(--accent); color: #fff; border-radius: 6px; padding: 16px 20px; box-shadow: 0 8px 24px rgba(26,92,58,0.25); text-align: center; }
+  .about-badge .bv { font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 600; line-height: 1; }
+  .about-badge .bl { font-size: 0.65rem; opacity: 0.85; margin-top: 2px; }
+
+  /* ── SERVICES ── */
+  #services { background: var(--bg); border-top: 1px solid var(--border); }
+  .services-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; margin-bottom: 56px; }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .svc-card { background: var(--surface); padding: 40px 32px; transition: background 0.25s; }
+  .svc-card:hover { background: var(--bg2); }
+  .svc-num { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 24px; }
+  .svc-icon { width: 44px; height: 44px; background: var(--accent-light); border-radius: 6px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 1.2rem; }
+  .svc-title { font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 600; color: var(--heading); margin-bottom: 12px; letter-spacing: -0.02em; line-height: 1.2; }
+  .svc-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.65; font-weight: 300; }
+  .svc-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 20px; }
+  .stag { font-size: 0.68rem; color: var(--accent); background: var(--accent-light); padding: 3px 9px; border-radius: 20px; }
+
+  /* ── TRAINING ── */
+  #training { background: var(--bg2); border-top: 1px solid var(--border); }
+  .training-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; margin-top: 56px; align-items: center; }
+  .training-video-outer { display: flex; justify-content: center; align-items: center; }
+  .training-video-wrap { position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.12); background: #000; width: 100%; max-width: 320px; margin: 0 auto; }
+  .training-video-wrap::before { content: ''; display: block; padding-top: 177.78%; }
+  .training-video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; border-radius: 12px; }
+  .training-info p { font-size: 0.95rem; color: var(--muted); line-height: 1.8; margin-bottom: 18px; font-weight: 300; }
+  .training-tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 28px 0; }
+  .tool-item { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; transition: border-color 0.2s; }
+  .tool-item:hover { border-color: var(--accent); }
+  .tool-item-icon { width: 36px; height: 36px; background: var(--accent-light); border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+  .tool-item-name { font-size: 0.85rem; font-weight: 500; color: var(--heading); }
+  .training-cta { display: inline-flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 500; background: var(--accent); color: #fff; padding: 13px 28px; text-decoration: none; border-radius: 2px; transition: opacity 0.2s; margin-top: 4px; }
+  .training-cta:hover { opacity: 0.85; }
+
+  /* ── LEADERS ── */
+  #leaders { background: var(--surface); border-top: 1px solid var(--border); }
+  .leaders-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+  .leader-card { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 36px 28px; transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s; position: relative; overflow: hidden; }
+  .leader-card:hover { border-color: rgba(26,92,58,0.3); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(26,92,58,0.08); }
+  .leader-card.founder::before { content: 'Founder'; position: absolute; top: 16px; right: 16px; font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent2); background: var(--accent2-light); border: 1px solid rgba(200,151,58,0.2); padding: 3px 8px; border-radius: 20px; }
+  .leader-card.co-founder::before { content: 'Co-Founder'; }
+  .leader-avatar { width: 64px; height: 64px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 600; color: #fff; margin-bottom: 24px; }
+  .leader-name { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.1rem; color: var(--heading); letter-spacing: -0.02em; margin-bottom: 4px; }
+  .leader-role { font-size: 0.78rem; color: var(--accent); font-weight: 500; margin-bottom: 16px; }
+  .leader-bio { font-size: 0.83rem; color: var(--muted); line-height: 1.65; font-weight: 300; }
+  .leader-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); text-decoration: none; transition: gap 0.2s; }
+  .leader-link:hover { gap: 10px; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--bg2); border-top: 1px solid var(--border); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; margin-top: 56px; align-items: start; }
+  .contact-info-text { font-size: 0.95rem; color: var(--muted); line-height: 1.75; font-weight: 300; margin-bottom: 40px; }
+  .contact-items { display: flex; flex-direction: column; gap: 12px; }
+  .ci { display: flex; align-items: center; gap: 14px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; text-decoration: none; transition: border-color 0.2s; }
+  .ci:hover { border-color: var(--accent); }
+  .ci-icon { width: 36px; height: 36px; background: var(--accent-light); border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+  .ci-label { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+  .ci-value { font-size: 0.85rem; color: var(--text); font-weight: 400; }
+  .contact-form { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 40px; }
+  .form-title { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 600; color: var(--heading); letter-spacing: -0.02em; margin-bottom: 28px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+  .form-group label { font-size: 0.72rem; font-weight: 500; color: var(--text); }
+  .form-group input, .form-group textarea, .form-group select { background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 11px 14px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.875rem; font-weight: 300; outline: none; border-radius: 4px; transition: border-color 0.2s; resize: none; appearance: none; }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--accent); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-submit { width: 100%; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.875rem; font-weight: 500; background: var(--accent); color: #fff; border: none; padding: 13px 28px; border-radius: 4px; cursor: pointer; margin-top: 8px; transition: opacity 0.2s; }
+  .form-submit:hover { opacity: 0.85; }
+
+  /* ── FOOTER ── */
+  footer { background: var(--heading); padding: 56px; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; }
+  .footer-brand .flogo { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 600; color: #fff; letter-spacing: -0.02em; margin-bottom: 12px; }
+  .footer-brand .flogo span { color: #6db88a; }
+  .footer-brand p { font-size: 0.82rem; color: rgba(255,255,255,0.45); line-height: 1.65; font-weight: 300; max-width: 220px; margin-bottom: 20px; }
+  .footer-socials { display: flex; gap: 10px; }
+  .fsoc { width: 34px; height: 34px; border: 1px solid rgba(255,255,255,0.12); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; transition: border-color 0.2s, color 0.2s; }
+  .fsoc:hover { border-color: #6db88a; color: #6db88a; }
+  .footer-col h4 { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(255,255,255,0.35); margin-bottom: 16px; }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 10px; }
+  .footer-col a { font-size: 0.82rem; color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+  .footer-col a:hover { color: #fff; }
+  .footer-bottom { background: var(--heading); border-top: 1px solid rgba(255,255,255,0.07); padding: 20px 56px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-bottom span { font-size: 0.75rem; color: rgba(255,255,255,0.3); font-family: 'JetBrains Mono', monospace; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes growUp { from { transform: scaleY(0); transform-origin: bottom; } to { transform: scaleY(1); transform-origin: bottom; } }
+  @keyframes pulseDot { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.7); } }
+  @keyframes floatAnim { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg2); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    #home { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 100px 24px 60px; }
+    .section-wrap { padding: 72px 24px; }
+    .about-grid, .contact-grid, .services-intro, .training-grid { grid-template-columns: 1fr; gap: 40px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .leaders-grid { grid-template-columns: 1fr; }
+    .training-video-wrap { max-width: 280px; }
+    .training-tools-grid { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr 1fr; padding: 40px 24px; }
+    .footer-bottom { padding: 16px 24px; flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 18 18" fill="none">
+        <rect x="1" y="8" width="3" height="9" fill="white" opacity="0.7"/>
+        <rect x="6" y="5" width="3" height="12" fill="white" opacity="0.85"/>
+        <rect x="11" y="1" width="3" height="16" fill="white"/>
+        <polyline points="2.5,8 7.5,5 12.5,1" stroke="white" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <span class="logo-text">Syria<span>analytics</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#training">Training</a></li>
+    <li><a href="#leaders">Leaders</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get in Touch</a>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-left">
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      <span>Founded 2026 · Damascus, Syria</span>
+    </div>
+    <h1 class="hero-title">Syria's #1<br><em>Market Mover</em></h1>
+    <p class="hero-desc">
+      Clarity in a complex world. We transform complex data into clear, actionable insights — empowering Syrian SMEs with affordable, tailored analytics solutions and hands-on training.
+    </p>
+    <div class="hero-btns">
+      <a href="#services" class="btn-primary">Our Services</a>
+      <a href="#contact" class="btn-outline">Contact Us</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-val">SME<span>s</span></div>
+        <div class="stat-lbl">Our Focus Market</div>
+      </div>
+      <div>
+        <div class="stat-val">5<span>+</span></div>
+        <div class="stat-lbl">Analytics Tools Taught</div>
+      </div>
+      <div>
+        <div class="stat-val">1<span>st</span></div>
+        <div class="stat-lbl">Of Its Kind in Syria</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="chart-card">
+        <div class="chart-title">
+          <span>SME Growth Analytics</span>
+          <span class="chart-live">Live</span>
+        </div>
+        <div class="bar-chart">
+          <div class="bc green" style="height:35%"></div>
+          <div class="bc gold" style="height:55%"></div>
+          <div class="bc green" style="height:48%"></div>
+          <div class="bc gold" style="height:72%"></div>
+          <div class="bc green" style="height:60%"></div>
+          <div class="bc gold" style="height:88%"></div>
+          <div class="bc green" style="height:75%"></div>
+          <div class="bc gold" style="height:95%"></div>
+        </div>
+        <div class="bar-labels">
+          <span>Q1</span><span>Q2</span><span>Q3</span><span>Q4</span>
+          <span>Q1</span><span>Q2</span><span>Q3</span><span>Q4</span>
+        </div>
+        <div class="metric-row">
+          <div class="metric-box">
+            <div class="m-val up">↑ 42%</div>
+            <div class="m-lbl">Revenue Growth</div>
+          </div>
+          <div class="metric-box">
+            <div class="m-val">↓ 28%</div>
+            <div class="m-lbl">Cost Reduction</div>
+          </div>
+          <div class="metric-box">
+            <div class="m-val up">3×</div>
+            <div class="m-lbl">Faster Decisions</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="float-tag">
+      <div class="float-icon">📊</div>
+      <div class="float-text">
+        <div class="fv">Power BI · Tableau</div>
+        <div class="fl">Hands-on Training Available</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-wrap">
+    <span class="label reveal">About Us</span>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <h2 class="section-title">Clarity in a<br>complex world</h2>
+        <p>Syrianalytics is Syria's pioneering data analytics and business intelligence company — purpose-built to serve small and medium-sized enterprises that have historically lacked access to professional analytics tools and expertise.</p>
+        <p>We believe every Syrian business deserves the same quality of data insight that powers global enterprises — at a price point and pace that actually works for them. From dashboard visualization to predictive modeling, our solutions are tailored, affordable, and built for real impact.</p>
+        <p>Beyond delivering solutions, we invest in building Syria's data talent. Our hands-on training programs in Excel, Tableau, Power BI, Python, and R programming equip businesses and professionals with the skills to own their own analytical capabilities.</p>
+        <div class="about-highlights">
+          <div class="highlight">
+            <div class="highlight-icon">🎯</div>
+            <div class="highlight-title">Built for SMEs</div>
+            <div class="highlight-desc">Affordable, right-sized analytics designed for Syrian businesses</div>
+          </div>
+          <div class="highlight">
+            <div class="highlight-icon">📈</div>
+            <div class="highlight-title">Smarter Decisions</div>
+            <div class="highlight-desc">Data that tells you not just what happened, but what to do next</div>
+          </div>
+          <div class="highlight">
+            <div class="highlight-icon">🎓</div>
+            <div class="highlight-title">Capability Building</div>
+            <div class="highlight-desc">Train your team to harness data independently</div>
+          </div>
+          <div class="highlight">
+            <div class="highlight-icon">🤝</div>
+            <div class="highlight-title">True Partnership</div>
+            <div class="highlight-desc">We work alongside you, not just for you</div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="about-img-stack">
+          <div class="about-card-main">
+            <p class="mission-quote">Transform complex data into clear, actionable insights.</p>
+            <div class="mission-credit">Syrianalytics Mission · Est. 2026</div>
+          </div>
+          <div class="about-badge">
+            <div class="bv">#1</div>
+            <div class="bl">Syria's Market<br>Mover</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-wrap">
+    <div class="services-intro reveal">
+      <div>
+        <span class="label">What We Do</span>
+        <h2 class="section-title">Analytics solutions<br>built for growth</h2>
+      </div>
+      <p class="section-sub">From data strategy to live dashboards — we cover the full analytics journey for Syrian SMEs, at every stage of their growth.</p>
+    </div>
+    <div class="services-grid reveal">
+      <div class="svc-card">
+        <div class="svc-num">01 ——</div>
+        <div class="svc-icon">📊</div>
+        <div class="svc-title">Dashboard Visualization</div>
+        <p class="svc-desc">Beautiful, intuitive dashboards that put your most important KPIs front and center — built in Power BI, Tableau, or custom tools to match your workflow.</p>
+        <div class="svc-tags"><span class="stag">Power BI</span><span class="stag">Tableau</span><span class="stag">Custom</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">02 ——</div>
+        <div class="svc-icon">🔮</div>
+        <div class="svc-title">Predictive Modeling</div>
+        <p class="svc-desc">Machine learning models that forecast demand, identify risks, and uncover growth opportunities before your competitors see them coming.</p>
+        <div class="svc-tags"><span class="stag">Python</span><span class="stag">R</span><span class="stag">ML</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">03 ——</div>
+        <div class="svc-icon">🗄️</div>
+        <div class="svc-title">Data Management</div>
+        <p class="svc-desc">Clean, structured, and reliable data pipelines. We help you collect, organize, and maintain data that you can actually trust and act on.</p>
+        <div class="svc-tags"><span class="stag">SQL</span><span class="stag">Excel</span><span class="stag">ETL</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">04 ——</div>
+        <div class="svc-icon">💡</div>
+        <div class="svc-title">Business Intelligence</div>
+        <p class="svc-desc">Comprehensive BI strategy and implementation — turning scattered data into a single source of truth for faster, smarter business decisions.</p>
+        <div class="svc-tags"><span class="stag">Reporting</span><span class="stag">KPIs</span><span class="stag">Strategy</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">05 ——</div>
+        <div class="svc-icon">📉</div>
+        <div class="svc-title">Cost Optimization</div>
+        <p class="svc-desc">Identify where your business is leaking value. Our models surface inefficiencies and prioritize high-impact opportunities to cut waste and improve margins.</p>
+        <div class="svc-tags"><span class="stag">Operations</span><span class="stag">Finance</span></div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-num">06 ——</div>
+        <div class="svc-icon">🌍</div>
+        <div class="svc-title">Market Intelligence</div>
+        <p class="svc-desc">Competitive and market landscape analysis tailored for the Syrian and regional market. Understand your position, your customers, and your opportunities.</p>
+        <div class="svc-tags"><span class="stag">Research</span><span class="stag">Competitive</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAINING -->
+<section id="training">
+  <div class="section-wrap">
+    <span class="label reveal">Training Programs</span>
+    <h2 class="section-title reveal">Learn to own<br>your own data</h2>
+    <p class="section-sub reveal">Hands-on training for businesses and professionals — from Excel basics to advanced Python and machine learning. Watch a sample of what we teach:</p>
+
+    <div class="training-grid">
+      <div class="training-video-outer reveal">
+        <div class="training-video-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/j_ZsMZEG-EI"
+            title="Syrianalytics Training Sample"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+      <div class="training-info reveal">
+        <p>We believe the best analytics investment isn't just a dashboard — it's your team knowing how to read, question, and act on data themselves. Our training programs are practical, beginner-friendly, and built around real Syrian business contexts.</p>
+        <p>Whether you're starting with Excel or diving into Python and R, our programs build lasting analytical capability at every level of your organization.</p>
+        <div class="training-tools-grid">
+          <div class="tool-item"><div class="tool-item-icon">📗</div><div class="tool-item-name">Microsoft Excel</div></div>
+          <div class="tool-item"><div class="tool-item-icon">📊</div><div class="tool-item-name">Tableau</div></div>
+          <div class="tool-item"><div class="tool-item-icon">📈</div><div class="tool-item-name">Power BI</div></div>
+          <div class="tool-item"><div class="tool-item-icon">🐍</div><div class="tool-item-name">Python</div></div>
+          <div class="tool-item"><div class="tool-item-icon">📉</div><div class="tool-item-name">R Programming</div></div>
+          <div class="tool-item"><div class="tool-item-icon">🎯</div><div class="tool-item-name">Real-World Projects</div></div>
+        </div>
+        <a href="https://www.youtube.com/@syrianalytics" target="_blank" class="training-cta">▶ Watch More on YouTube</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERS -->
+<section id="leaders">
+  <div class="section-wrap">
+    <span class="label reveal">Our Team</span>
+    <h2 class="section-title reveal">The people behind<br>the insights</h2>
+    <p class="section-sub reveal">A founding team passionate about unlocking Syria's data potential — for every business, not just the biggest ones.</p>
+    <div class="leaders-grid">
+      <div class="leader-card founder reveal">
+        <div class="leader-avatar" style="background: linear-gradient(135deg, #1a5c3a, #2d9e63);">OM</div>
+        <div class="leader-name">Osama Mahmoud</div>
+        <div class="leader-role">Founder & CEO</div>
+        <p class="leader-bio">A driven data scientist and business analyst with hands-on expertise in Python, R, Tableau, and SQL. Osama founded Syrianalytics to bridge the analytics gap for Syrian SMEs — combining rigorous technical skill with a deep understanding of the local business landscape.</p>
+        <a href="https://www.linkedin.com/in/engosamahmoud/" target="_blank" class="leader-link">View LinkedIn ↗</a>
+      </div>
+      <div class="leader-card founder co-founder reveal">
+        <div class="leader-avatar" style="background: linear-gradient(135deg, #c8973a, #e8b84b);">RB</div>
+        <div class="leader-name">Rami Al Basiri</div>
+        <div class="leader-role">Co-Founder</div>
+        <p class="leader-bio">Rami brings strategic leadership and operational expertise to Syrianalytics. A key driver of the company's vision, he plays a central role in shaping service delivery, building client partnerships, and expanding Syrianalytics' reach across Syria's business community.</p>
+        <a href="https://www.linkedin.com/in/rami-albasiri/" target="_blank" class="leader-link">View LinkedIn ↗</a>
+      </div>
+      <div class="leader-card founder co-founder reveal">
+        <div class="leader-avatar" style="background: linear-gradient(135deg, #2563eb, #4f8ef7);">MR</div>
+        <div class="leader-name">Muhyiddin Ramdoun</div>
+        <div class="leader-role">Co-Founder</div>
+        <p class="leader-bio">A dedicated professional with a passion for data-driven transformation. Muhyiddin contributes deep domain knowledge and collaborative energy to Syrianalytics, helping shape the company's analytics methodologies and supporting its mission to empower Syrian businesses.</p>
+        <a href="https://www.linkedin.com/in/muhyiddinramdoun/" target="_blank" class="leader-link">View LinkedIn ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-wrap">
+    <span class="label reveal">Get in Touch</span>
+    <h2 class="section-title reveal">Ready to turn data<br>into your advantage?</h2>
+    <div class="contact-grid">
+      <div class="reveal">
+        <p class="contact-info-text">We work with Syrian SMEs to build affordable, tailored analytics solutions. Tell us about your business — we'll explore together how data can drive your growth.</p>
+        <div class="contact-items">
+          <a href="mailto:syrianalytics@gmail.com" class="ci">
+            <div class="ci-icon">✉️</div>
+            <div><div class="ci-label">Email</div><div class="ci-value">syrianalytics@gmail.com</div></div>
+          </a>
+          <a href="https://t.me/syrianalytics" target="_blank" class="ci">
+            <div class="ci-icon">💬</div>
+            <div><div class="ci-label">Telegram</div><div class="ci-value">@syrianalytics</div></div>
+          </a>
+          <a href="https://www.youtube.com/@syrianalytics" target="_blank" class="ci">
+            <div class="ci-icon">▶️</div>
+            <div><div class="ci-label">YouTube</div><div class="ci-value">@syrianalytics</div></div>
+          </a>
+          <a href="https://www.linkedin.com/company/syrianalytics" target="_blank" class="ci">
+            <div class="ci-icon">🔗</div>
+            <div><div class="ci-label">LinkedIn</div><div class="ci-value">Syrianalytics</div></div>
+          </a>
+          <div class="ci">
+            <div class="ci-icon">📍</div>
+            <div><div class="ci-label">Headquarters</div><div class="ci-value">Damascus, Syria</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal">
+        <div class="form-title">Send us a message</div>
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" onsubmit="handleForm(event)">
+          <input type="hidden" name="_subject" value="New enquiry from Syrianalytics website">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" name="first_name" placeholder="Ahmad" required>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" name="last_name" placeholder="Hassan" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="you@company.com" required>
+          </div>
+          <div class="form-group">
+            <label>Company / Business</label>
+            <input type="text" name="company" placeholder="Your business name">
+          </div>
+          <div class="form-group">
+            <label>Service Interest</label>
+            <select name="service">
+              <option value="">Select a service...</option>
+              <option>Dashboard Visualization</option>
+              <option>Predictive Modeling</option>
+              <option>Data Management</option>
+              <option>Business Intelligence</option>
+              <option>Analytics Training</option>
+              <option>Market Intelligence</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea rows="4" name="message" placeholder="Tell us about your data challenges and goals..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send Message →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="flogo">Syria<span>analytics</span></div>
+    <p>Syria's #1 Market Mover. Clarity in a complex world. Founded 2026, Damascus.</p>
+    <div class="footer-socials">
+      <a href="https://www.linkedin.com/company/syrianalytics" target="_blank" class="fsoc">in</a>
+      <a href="https://t.me/syrianalytics" target="_blank" class="fsoc">tg</a>
+      <a href="https://www.youtube.com/@syrianalytics" target="_blank" class="fsoc">yt</a>
+    </div>
+  </div>
+  <div class="footer-col">
+    <h4>Navigation</h4>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#training">Training</a></li>
+      <li><a href="#leaders">Leaders</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Services</h4>
+    <ul>
+      <li><a href="#services">Dashboard Visualization</a></li>
+      <li><a href="#services">Predictive Modeling</a></li>
+      <li><a href="#services">Business Intelligence</a></li>
+      <li><a href="#training">Analytics Training</a></li>
+      <li><a href="#services">Market Intelligence</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4>Contact</h4>
+    <ul>
+      <li><a href="mailto:syrianalytics@gmail.com">syrianalytics@gmail.com</a></li>
+      <li><a href="https://t.me/syrianalytics" target="_blank">Telegram: @syrianalytics</a></li>
+      <li><a href="https://www.youtube.com/@syrianalytics" target="_blank">YouTube: @syrianalytics</a></li>
+      <li><a href="https://www.linkedin.com/company/syrianalytics" target="_blank">LinkedIn</a></li>
+      <li><a href="#">Damascus, Syria</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>© 2026 Syrianalytics. All rights reserved.</span>
+  <span>Founded in Damascus · Built for Syria</span>
+</div>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => obs.observe(el));
+
+  function handleForm(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = '✓ Message Sent!';
+    btn.style.background = '#2d9e63';
+    setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; e.target.reset(); }, 3500);
+  }
+</script>
+</body>
+</html>
